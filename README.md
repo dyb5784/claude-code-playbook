@@ -226,7 +226,7 @@ If you use this playbook in research or professional work, please cite:
 
 ```bibtex
 @software{claude_playbook_v3,
-  author = {dyb5784},
+  author = {dyb},
   title = {Claude Code Playbook: Token-Efficient AI Engineering},
   year = {2025},
   version = {3.0.0},
