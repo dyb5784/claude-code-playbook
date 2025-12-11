@@ -1,187 +1,92 @@
 # 🤖 Claude Code Playbook
 
-A comprehensive AI-assisted development toolkit for efficient, token-aware collaboration with Claude Code.
-
-**Version**: 1.0.0  
-**License**: MIT  
+**Version**: 4.0.0
+**License**: MIT
+**DOI**: [10.5281/zenodo.17781760](https://doi.org/10.5281/zenodo.17781760)
 **Repository**: https://github.com/dyb5784/claude-code-playbook
 
----
-
-## 🎯 What is Claude Code Playbook?
-
-The Claude Code Playbook is a token-efficient AI engineering system that reduces conversation turns by 67% through specialized workflows and systematic development protocols.
-
-### Key Benefits
-- **67% reduction** in conversation turns for refactoring tasks
-- **Predictable token costs** per operation type
-- **Budget-aware development** optimized for Claude Pro limits
-- **Reusable across projects** - Apply to any codebase
-- **Proven workflows** - Field-tested patterns and practices
+A token-efficient AI engineering system that reduces conversation turns by 67% through specialized workflows.
 
 ---
 
-## 📂 Repository Structure
+## 🎯 What is v4.0.0?
 
-```
-claude-code-playbook/
-├── README.md                         # This file
-├── LICENSE                           # MIT License
-├── CONTRIBUTING.md                   # Contribution guidelines
-├── docs/                             # Documentation
-│   ├── GETTING_STARTED.md            # Quick start guide
-│   ├── WORKFLOW_GUIDE.md             # Workflow usage guide
-│   ├── CREATING_SKILLS.md            # Skill development guide
-│   └── EXAMPLES.md                   # Usage examples
-├── skills/                           # Core skills directory
-│   ├── README.md                     # Skills overview
-│   ├── python-scientific/            # Python scientific computing
-│   │   ├── SKILL.md                  # Main skill file
-│   │   └── examples/                 # Code examples
-│   └── refactoring/                  # General refactoring
-│       ├── SKILL.md                  # Skill overview
-│       ├── workflows/                # Workflow definitions
-│       │   ├── triage.md
-│       │   ├── extract.md
-│       │   ├── modernize.md
-│       │   ├── qnew.md
-│       │   ├── qplan.md
-│       │   ├── qcode.md
-│       │   └── catchup.md
-│       ├── knowledge/                # Reference materials
-│       │   ├── typescript-style.md
-│       │   └── architecture-patterns.md
-│       └── examples/                 # Refactoring examples
-├── templates/                        # Project templates
-│   ├── CLAUDE.md.template           # Project constitution template
-│   ├── .cursorrules.template        # IDE rules template
-│   └── python-project/              # Python project template
-└── examples/                         # Example projects
-    ├── python-scientific-example/   # Python scientific example
-    └── refactoring-example/         # Refactoring example
-```
+Complete AI-assisted development system with two specialized skills and seven production workflows.
+
+**Key Features:**
+- **Python Scientific Computing**: Research-grade patterns for NumPy/SciPy
+- **General Refactoring**: 7 structured workflows (triage, extract, modernize, qnew, qplan, qcode, catchup)
+- **Project Templates**: CLAUDE.md.template and .cursorrules.template
+- **Token Optimization**: 67% reduction in conversation turns
 
 ---
 
-## 🚀 Quick Start
+## 📂 Quick Start
 
-### For Project Maintainers
-
-1. **Clone the playbook:**
-   ```bash
-   git clone https://github.com/dyb5784/claude-code-playbook.git
-   cd claude-code-playbook
-   ```
-
-2. **Copy templates to your project:**
-   ```bash
-   cp templates/CLAUDE.md.template /path/to/your/project/CLAUDE.md
-   cp templates/.cursorrules.template /path/to/your/project/.cursorrules
-   ```
-
-3. **Customize the templates** for your project's specific needs
-
-4. **Start using Claude Code** with your project!
-
-### For Claude Code Users
-
+**1. Clone and setup:**
 ```bash
-# Start a session
+git clone https://github.com/dyb5784/claude-code-playbook.git
+cd claude-code-playbook
+cp templates/CLAUDE.md.template /path/to/your/project/CLAUDE.md
+cp templates/.cursorrules.template /path/to/your/project/.cursorrules
+```
+
+**2. Start using:**
+```bash
 /clear
 claude skills refactoring qnew
-
-# Analyze your codebase
 claude skills refactoring triage
-
-# Extract and modernize code
-claude skills refactoring extract
-claude skills refactoring modernize
 ```
-
----
-
-## 📚 Available Skills
-
-### 1. Python Scientific Computing
-
-**Location**: `skills/python-scientific/SKILL.md`
-
-Best practices for research-grade Python development with NumPy/SciPy:
-- Vectorization over loops
-- Random seed management for reproducibility
-- Type hints with `numpy.typing`
-- Configuration management with dataclasses
-- Parallel processing patterns
-- Performance profiling
-
-**Use for**: Scientific simulations, numerical analysis, statistical validation
-
-### 2. General Refactoring
-
-**Location**: `skills/refactoring/SKILL.md`
-
-Structured workflows for code quality improvement:
-- **triage**: Identify technical debt hotspots
-- **extract**: Extract reusable components
-- **modernize**: Update to modern patterns
-- **qnew**: Quick new feature development
-- **qplan**: Quick planning session
-- **qcode**: Full implementation with verification
-- **catchup**: Resume after context clear
-
-**Use for**: Architectural changes, code organization, modernization
 
 ---
 
 ## 📊 Token Economics
 
-### Claude Pro Limits
-- **10-40 prompts** per 5-hour window
-- **~44,000 tokens** total capacity
+**Claude Pro Optimization:**
+- 10-40 prompts per 5-hour window
+- ~44,000 tokens total capacity
+- Example session: 22K tokens (50% of budget)
 
-### Example Session (Within Budget)
-```
-qnew:        2K tokens
-triage:      2K tokens
-qplan:       3K tokens
-extract #1:  5K tokens
-/clear + catchup: 1K tokens
-extract #2:  5K tokens
-modernize:   4K tokens
-─────────────────────────
-Total:      22K tokens (50% of budget)
-```
+**Workflow Costs:**
+- triage: 2K | qnew: 2K | qplan: 3K | extract: 5K
+- modernize: 4K | qcode: 8-12K | catchup: 1-2K
 
-### Session Management Protocol
-**Every 5-7 prompts, execute:**
+**Session Protocol (every 5-7 prompts):**
 ```bash
-/cost                              # Check token usage
+/cost                              # Check usage
 /clear                             # Reset context
 claude skills refactoring catchup  # Restore context
 ```
 
 ---
 
+## 📚 Available Skills
+
+### Python Scientific Computing
+**Location**: `skills/python-scientific/SKILL.md`
+
+Vectorization, reproducibility, type hints, configuration, parallel processing, performance profiling.
+
+### General Refactoring
+**Location**: `skills/refactoring/SKILL.md`
+
+7 workflows: triage, extract, modernize, qnew, qplan, qcode, catchup.
+
+---
+
+## 📖 Documentation
+
+- **[docs/GETTING_STARTED.md](docs/GETTING_STARTED.md)** - Step-by-step guide
+- **[docs/WORKFLOW_GUIDE.md](docs/WORKFLOW_GUIDE.md)** - Detailed workflow usage
+- **[skills/README.md](skills/README.md)** - Skill selection guide
+
+---
+
 ## 🎓 Learning Path
 
-### Beginner (Sessions 1-2)
-1. Read `docs/GETTING_STARTED.md`
-2. Run `claude skills refactoring qnew`
-3. Use `triage` to understand your codebase
-4. Extract 1 simple function with `extract`
-5. Practice `/clear` + `catchup` protocol
-
-### Intermediate (Sessions 3-10)
-1. Use `qplan` before extractions
-2. Extract 2-3 functions per session
-3. Apply `modernize` to update patterns
-4. Track progress in `REFACTOR_PROGRESS.md`
-
-### Advanced (Sessions 10+)
-1. Use `qcode` for batch operations (10-15 files)
-2. Design custom extraction strategies
-3. Contribute patterns back to knowledge base
-4. Create new skills for your domain
+**Beginner:** Read docs → Run qnew → Use triage → Extract 1 function
+**Intermediate:** Use qplan → Extract 2-3 functions → Apply modernize
+**Advanced:** Use qcode (10-15 files) → Design custom strategies → Contribute back
 
 ---
 
@@ -198,43 +103,33 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ---
 
-## 📖 Documentation
+## 🏆 Success Metrics
 
-- **[docs/GETTING_STARTED.md](docs/GETTING_STARTED.md)** - Quick start guide
-- **[docs/WORKFLOW_GUIDE.md](docs/WORKFLOW_GUIDE.md)** - Detailed workflow usage
-- **[docs/CREATING_SKILLS.md](docs/CREATING_SKILLS.md)** - How to create new skills
-- **[docs/EXAMPLES.md](docs/EXAMPLES.md)** - Real-world usage examples
+Originally developed for [ACP Simulation](https://github.com/dyb5784/acp-simulation):
+- 67% reduction in conversation turns
+- 100% test pass rate maintained
+- Zero API breakage
+- 40% improvement in maintainability
 
 ---
 
-## 🏆 Success Stories
+## 🤝 Contributing
 
-This playbook was originally developed for the [ACP Simulation](https://github.com/dyb5784/acp-simulation) project, where it achieved:
-- **67% reduction** in conversation turns
-- **100% test pass rate** maintained throughout refactoring
-- **Zero API breakage** with systematic validation gates
-- **40% improvement** in code maintainability
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## 📞 Support
 
-**For playbook issues:**
-1. Check [docs/WORKFLOW_GUIDE.md](docs/WORKFLOW_GUIDE.md)
-2. Review skill documentation in `skills/`
-3. Open an issue on GitHub
-
-**For Claude Code issues:**
-- See [Claude Code Documentation](https://docs.claude.com/claude-code)
+**Issues:** Open on GitHub
+**Claude Code Docs:** https://docs.claude.com/claude-code
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**Version**: 1.0.0  
-**Date**: December 11, 2025  
-**Status**: ✅ Production Ready
+**Version**: 4.0.0 | **Date**: December 11, 2025 | **Status**: ✅ Production Ready
