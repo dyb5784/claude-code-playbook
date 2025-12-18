@@ -1,0 +1,241 @@
+---
+name: fix-issue
+description: "Complete workflow to fix a GitHub issue"
+arguments: "issue_number"
+---
+
+# Fix GitHub Issue: $ARGUMENTS
+
+This workflow automates the complete process of fixing a GitHub issue from investigation to closure.
+
+## Step 1: Fetch Issue Details
+
+```bash
+gh issue view $ARGUMENTS
+```
+
+**Extract:**
+- Issue title and description
+- Labels and priority
+- Related files or components mentioned
+- Expected behavior vs actual behavior
+
+## Step 2: Search Codebase
+
+Based on issue description, search for relevant files:
+
+```bash
+# Search for error messages
+grep -r "error message from issue" src/
+
+# Search for function/class names mentioned
+grep -r "function_name" src/
+
+# Check recent changes to relevant files
+git log --oneline --follow -- path/to/file.ext
+```
+
+**Identify:**
+- Files most likely containing the bug
+- Recent changes that might have introduced the issue
+- Related functionality that might be affected
+
+## Step 3: Reproduce the Issue (if possible)
+
+Create a minimal reproduction:
+
+```python
+# test_issue_$ARGUMENTS.py
+def test_issue_reproduction():
+    """Reproduce issue #$ARGUMENTS"""
+    # Setup
+    # ...
+    
+    # Execute
+    result = problematic_function(test_input)
+    
+    # Assert expected behavior
+    assert result == expected_value, f"Issue #$ARGUMENTS not fixed"
+```
+
+Run the test to confirm issue:
+```bash
+pytest test_issue_$ARGUMENTS.py -v
+```
+
+**Expected:** Test should fail, confirming the issue
+
+## Step 4: Implement Fix
+
+**Guidelines:**
+- Make minimal changes to fix the issue
+- Follow project's coding standards (see CLAUDE.md)
+- Add type hints if missing
+- Add docstrings if missing
+
+**Before writing code, consider:**
+- Root cause vs symptom
+- Edge cases that might trigger similar issues
+- Impact on existing functionality
+
+**Write the fix:**
+- Modify only what's necessary
+- Keep changes focused and reviewable
+- Add comments explaining non-obvious logic
+
+## Step 5: Update/Add Tests
+
+```bash
+# Run existing tests to ensure no regression
+npm test  # OR: pytest tests/
+
+# Add new test if one doesn't exist
+# Update test if behavior changed intentionally
+```
+
+**Test Coverage Checklist:**
+- [ ] Happy path covered
+- [ ] Edge cases from issue covered
+- [ ] Regression test prevents recurrence
+- [ ] All existing tests still pass
+
+## Step 6: Validate Changes
+
+Run all validation checks:
+
+```bash
+# Type checking
+npm run type-check  # OR: mypy src/
+
+# Linting
+npm run lint  # OR: flake8 src/
+
+# Tests
+npm test  # OR: pytest tests/ -v
+
+# Build (if applicable)
+npm run build
+```
+
+**All must pass before proceeding.**
+
+## Step 7: Commit Changes
+
+```bash
+git add <modified files>
+git commit -m "fix: resolve issue #$ARGUMENTS - <brief description>
+
+<Detailed description of the fix>
+
+Closes #$ARGUMENTS
+
+Changes:
+- <specific change 1>
+- <specific change 2>
+
+Tests: <test status>
+Validation: All checks pass"
+```
+
+## Step 8: Link and Close Issue
+
+**Option A: If you can push directly**
+```bash
+git push origin <branch-name>
+gh issue close $ARGUMENTS --comment "Fixed in commit $(git rev-parse HEAD)"
+```
+
+**Option B: If you need PR**
+```bash
+git push origin fix/issue-$ARGUMENTS
+gh pr create --title "Fix: Issue #$ARGUMENTS - <brief description>" \
+  --body "Fixes #$ARGUMENTS
+
+## Changes
+- <change 1>
+- <change 2>
+
+## Testing
+- [x] All existing tests pass
+- [x] Added test for issue scenario
+- [x] Manually verified fix
+
+## Validation
+- [x] Type check passes
+- [x] Linting passes
+- [x] Build succeeds"
+```
+
+## Step 9: Verify Issue Resolution
+
+After merge:
+
+```bash
+# Pull latest changes
+git pull origin main
+
+# Verify fix in latest code
+grep -A 5 "relevant function" src/path/to/file.ext
+
+# Run full test suite again
+npm test  # OR: pytest tests/ -v
+```
+
+## Summary Report
+
+Provide user with:
+
+```markdown
+## Issue #$ARGUMENTS Fix Summary
+
+**Issue:** {brief description}
+**Root Cause:** {explanation}
+**Solution:** {what was changed}
+
+**Files Modified:**
+- {file1}: {what changed}
+- {file2}: {what changed}
+
+**Tests Added/Updated:**
+- {test file}: {what it tests}
+
+**Validation:**
+- ✅ Type check: Pass
+- ✅ Lint: Pass
+- ✅ Tests: {X} passed, 0 failed
+- ✅ Build: Success
+
+**Next Steps:**
+{If PR: awaiting review | If merged: deployed to {environment}}
+```
+
+---
+
+## Budget Awareness
+
+**Estimated token cost:** 3-6K tokens (varies by complexity)
+
+**Tips to stay efficient:**
+- Focus on most likely files first
+- Don't read entire large files, use grep
+- Test early to confirm reproduction
+- Use /clear + catchup if > 7 prompts
+
+---
+
+## Usage Examples
+
+```bash
+# Basic usage
+/project:fix-issue 1234
+
+# With context
+"I need to fix issue 1234 about login failures"
+/project:fix-issue 1234
+```
+
+---
+
+**Last Updated:** 2025-12-18  
+**Token Cost:** ~3-6K  
+**Success Rate:** High (if issue is well-described)

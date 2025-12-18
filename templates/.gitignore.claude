@@ -1,0 +1,18 @@
+# Claude Code personal configs
+.claude/CLAUDE.local.md
+.claude/local-commands/
+.claude/cache/
+.claude/*.log
+
+# Keep these IN version control:
+# .claude/settings.json
+# .claude/commands/
+# CLAUDE.md
+# .mcp.json
+
+# Claude temporary files
+REFACTOR_PROGRESS.md
+
+# Environment variables
+.env.local
+.env.*.local
