@@ -1,0 +1,35 @@
+# Claude Code Productivity Aliases
+# Add to ~/.bashrc or ~/.zshrc
+
+# Core Claude Commands
+alias cc='claude --dangerously-skip-permissions'
+alias ccp='claude'  # With permissions (safer)
+alias ccinfo='claude /context'
+alias ccclear='claude /clear'
+alias cccompact='claude /compact'
+alias cccost='claude /cost'
+
+# Workflow Shortcuts
+alias cctriage='claude skills refactoring triage'
+alias ccnew='claude skills refactoring qnew'
+alias ccplan='claude skills refactoring qplan'
+alias ccextract='claude skills refactoring extract'
+alias ccmodernize='claude skills refactoring modernize'
+alias cccode='claude skills refactoring qcode'
+alias cccatchup='claude skills refactoring catchup'
+
+# Custom Commands (adjust project name as needed)
+alias ccfix='claude /project:fix-issue'
+alias ccreview='claude /project:review-code'
+alias ccdeploy='claude /project:deploy'
+
+# Session Management Helpers
+alias ccreset='claude /clear && claude skills refactoring catchup'
+alias cccheck='bash scripts/check_config_health.sh'
+
+# Git + Claude Helpers
+alias gccc='git add . && claude /project:review-code && git commit'
+alias gpcc='git push && cccheck'
+
+echo "✅ Claude Code aliases loaded!"
+echo "Usage: cc, cctriage, ccnew, ccplan, etc."

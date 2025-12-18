@@ -1,0 +1,435 @@
+---
+name: deploy
+description: "Pre-deployment checklist and deployment workflow"
+---
+
+# Deployment Workflow
+
+Comprehensive pre-deployment checklist and deployment execution.
+
+## Pre-Deployment Checklist
+
+### 1. Code Quality ✓
+
+```bash
+# Run tests
+npm test  # OR: pytest tests/ -v
+
+# Check test results
+echo "Tests passed: $?"
+```
+
+**Status:** {Pass/Fail}
+**Failed tests:** {list if any}
+
+```bash
+# Type checking
+npm run type-check  # OR: mypy src/ --strict
+
+# Check results
+echo "Type check status: $?"
+```
+
+**Status:** {Pass/Fail}
+**Type errors:** {list if any}
+
+```bash
+# Linting
+npm run lint  # OR: flake8 src/
+
+# Check results
+echo "Lint status: $?"
+```
+
+**Status:** {Pass/Fail}
+**Lint errors:** {list if any}
+
+**Decision Point:** 
+- ✅ All quality checks pass → Continue
+- ❌ Any check fails → **STOP**, fix issues first
+
+### 2. Build Verification ✓
+
+```bash
+# Clean previous build
+rm -rf dist/ build/
+
+# Build for production
+npm run build  # OR: python -m build
+
+# Check build output
+ls -lh dist/
+```
+
+**Status:** {Success/Failed}
+**Build artifacts:** {list key files}
+**Bundle size:** {size - check if reasonable}
+
+### 3. Database Migrations ✓
+
+```bash
+# Check for pending migrations
+git diff origin/main -- migrations/
+# OR: npx prisma migrate status
+# OR: python manage.py showmigrations
+```
+
+**Pending migrations:** {Yes/No}
+
+**If yes:**
+```bash
+# Review migration files
+cat migrations/XXXXXX_migration_name.sql
+
+# Test migration on staging
+npm run migrate:staging  # OR your migration command
+```
+
+**Migration status:** {Safe/Needs Review}
+**Risks identified:** {list any concerns}
+
+### 4. Environment Variables ✓
+
+```bash
+# Compare .env.example with production
+diff <(sort .env.example) <(sort .env.production)
+```
+
+**New variables needed:** {list}
+**Deprecated variables:** {list}
+
+**Action required:** 
+- [ ] Add new variables to production environment
+- [ ] Update deployment documentation
+- [ ] Notify team of changes
+
+### 5. Dependencies ✓
+
+```bash
+# Check for dependency changes
+git diff origin/main -- package.json  # OR: requirements.txt, go.mod
+```
+
+**New dependencies:** {list}
+**Updated dependencies:** {list}
+**Breaking changes:** {Yes/No}
+
+**If new dependencies:**
+- [ ] Licenses verified
+- [ ] Security audit passed: `npm audit` OR `pip-audit`
+- [ ] Team informed of new deps
+
+### 6. Configuration Validation ✓
+
+```bash
+# Verify configuration files
+cat config/production.json  # OR your config file
+
+# Check for secrets
+grep -r "SECRET\|PASSWORD\|API_KEY" config/
+```
+
+**Issues found:** {list any hardcoded secrets}
+
+**Security checklist:**
+- [ ] No secrets in configuration files
+- [ ] All secrets in environment variables
+- [ ] Secrets rotation schedule documented
+
+### 7. Smoke Tests ✓
+
+**Critical paths to verify:**
+- [ ] Application starts without errors
+- [ ] Health check endpoint responds
+- [ ] Database connection succeeds
+- [ ] External API connections work
+- [ ] Authentication flow functional
+
+```bash
+# Start application locally with production config
+NODE_ENV=production npm start  # OR your start command
+
+# Test health endpoint
+curl http://localhost:PORT/health
+
+# Expected: {"status": "healthy"}
+```
+
+### 8. Rollback Plan ✓
+
+**Current version:** {git commit hash}
+**Previous stable version:** {git commit hash}
+
+**Rollback procedure:**
+```bash
+# If deployment fails:
+git revert {current-commit-hash}
+git push origin main
+
+# OR: revert to previous version
+git reset --hard {previous-stable-hash}
+git push origin main --force
+```
+
+**Rollback time estimate:** {X minutes}
+
+---
+
+## Deployment Execution
+
+### Step 1: Tag Release
+
+```bash
+# Create version tag
+git tag -a v{major.minor.patch} -m "Release v{major.minor.patch}"
+
+# Push tag
+git push origin v{major.minor.patch}
+```
+
+**Version:** v{major.minor.patch}
+**Release notes:** {brief description}
+
+### Step 2: Deploy to Staging
+
+```bash
+# Deploy to staging environment
+npm run deploy:staging  # OR your staging deploy command
+
+# Wait for deployment
+sleep 30
+```
+
+**Staging URL:** {staging-url}
+
+### Step 3: Verify Staging Deployment
+
+```bash
+# Health check
+curl https://staging.yourapp.com/health
+
+# Test critical endpoints
+curl https://staging.yourapp.com/api/users/me
+
+# Check logs
+{command to view logs}
+```
+
+**Staging verification:**
+- [ ] Application responding
+- [ ] Health check green
+- [ ] Critical endpoints working
+- [ ] No errors in logs
+
+### Step 4: Monitor Staging
+
+**Wait 5-10 minutes and monitor:**
+- Error rates
+- Response times
+- Resource usage (CPU, memory)
+- Database connections
+
+```bash
+# Check error rates
+{command to check error monitoring - e.g., Sentry dashboard}
+
+# Check metrics
+{command to check application metrics}
+```
+
+**Staging status:** {Stable/Unstable}
+
+**Decision Point:**
+- ✅ Staging stable for 5+ minutes → Continue to production
+- ❌ Issues detected → **STOP**, investigate and fix
+
+### Step 5: Deploy to Production
+
+```bash
+# Final confirmation prompt
+echo "Deploy to PRODUCTION? (yes/no)"
+read confirmation
+
+if [ "$confirmation" = "yes" ]; then
+  npm run deploy:production  # OR your production deploy command
+  echo "Deployment initiated at $(date)"
+fi
+```
+
+**Production deployment time:** {timestamp}
+
+### Step 6: Verify Production Deployment
+
+```bash
+# Health check (wait 30s for startup)
+sleep 30
+curl https://yourapp.com/health
+
+# Verify version
+curl https://yourapp.com/version
+# Expected: {version-tag}
+
+# Test authentication
+curl -X POST https://yourapp.com/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"test"}'
+
+# Check key endpoints
+curl https://yourapp.com/api/critical-endpoint
+```
+
+**Production verification:**
+- [ ] Health check responds
+- [ ] Correct version deployed
+- [ ] Authentication works
+- [ ] Key endpoints functional
+
+### Step 7: Monitor Production (First 15 minutes)
+
+**Monitor closely for:**
+- Error spike
+- Increased response times
+- Memory leaks
+- Database issues
+
+```bash
+# Watch logs in real-time
+{command to tail production logs}
+
+# Check error tracking
+# Open: https://sentry.io/your-org/your-project
+
+# Check application metrics
+# Open: https://monitoring-dashboard-url
+```
+
+**Monitoring checklist:**
+- [ ] Error rate < baseline
+- [ ] Response time < baseline + 10%
+- [ ] Memory stable
+- [ ] CPU usage normal
+- [ ] No database connection errors
+
+### Step 8: Notify Team
+
+```bash
+# Post to Slack/Discord
+{command or manual notification}
+```
+
+**Notification template:**
+```
+🚀 Production Deployment Complete
+
+Version: v{major.minor.patch}
+Deployed: {timestamp}
+Status: {Success/Monitoring}
+
+Changes:
+- {change 1}
+- {change 2}
+
+Monitoring: {dashboard-url}
+Rollback plan: Documented in deployment log
+```
+
+---
+
+## Post-Deployment
+
+### 15-Minute Check
+
+**After 15 minutes:**
+- [ ] No error spikes detected
+- [ ] Response times stable
+- [ ] No customer complaints
+- [ ] Monitoring green
+
+**Status:** {Successful/Needs Attention}
+
+### 1-Hour Check
+
+**After 1 hour:**
+- [ ] All metrics normal
+- [ ] Background jobs processing
+- [ ] Scheduled tasks running
+- [ ] Database performance stable
+
+**Status:** {Stable/Issues Detected}
+
+### Document Deployment
+
+```markdown
+# Deployment Log
+
+**Date:** {date}
+**Version:** v{major.minor.patch}
+**Deployed by:** {your-name}
+**Duration:** {X minutes}
+
+**Pre-deployment checks:** All passed
+**Staging verification:** Successful
+**Production deployment:** Successful
+**Post-deployment monitoring:** Stable
+
+**Issues encountered:** {None / List issues}
+**Rollbacks:** {None / List rollbacks}
+
+**Next deployment:** Estimated {date}
+```
+
+---
+
+## Rollback Procedure
+
+**If issues detected:**
+
+```bash
+# 1. Immediate rollback
+git revert {problematic-commit}
+npm run deploy:production  # OR emergency rollback command
+
+# 2. Notify team
+echo "ROLLBACK INITIATED - Production issues detected"
+
+# 3. Investigate
+git log --oneline -10
+git diff {previous-version} {current-version}
+
+# 4. Document
+echo "Rollback reason: {explanation}" >> deployment-log.md
+```
+
+---
+
+## Usage Examples
+
+```bash
+# Standard deployment
+/project:deploy
+
+# Staging only
+"Deploy to staging for testing"
+/project:deploy
+
+# Emergency deployment
+"Emergency deploy with minimal checks"
+/project:deploy
+```
+
+---
+
+## Budget Awareness
+
+**Estimated token cost:** 3-5K tokens
+
+**Tips:**
+- Use for production deployments only
+- Staging deploys can use simpler checklists
+- Run checklist once, then execute
+
+---
+
+**Last Updated:** 2025-12-18  
+**Token Cost:** ~3-5K  
+**Critical Usage:** Production deployments only

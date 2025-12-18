@@ -1,0 +1,37 @@
+{
+  "allowedTools": [
+    "Edit",
+    "Write",
+    "Bash"
+  ],
+  "allowedCommands": [
+    "git add",
+    "git commit",
+    "git push",
+    "git status",
+    "git diff",
+    "git log",
+    
+    "npm install",
+    "npm test",
+    "npm run build",
+    "npm run dev",
+    "npm run lint",
+    
+    "pytest",
+    "pytest -xvs",
+    "python -m pytest tests/",
+    "python -m mypy src/",
+    "flake8 src/",
+    
+    "ls",
+    "cat",
+    "grep",
+    "find",
+    "wc"
+  ],
+  "mcpServers": {},
+  "contextManagement": {
+    "preserveWorkingMemory": true
+  }
+}

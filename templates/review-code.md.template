@@ -1,0 +1,271 @@
+---
+name: review-code
+description: "Comprehensive code review with security and quality checks"
+---
+
+# Code Review
+
+Perform a comprehensive review of current changes with focus on security, logic, performance, and testing.
+
+## Step 1: Check Git Diff
+
+```bash
+# See what's changed
+git status
+git diff --stat
+
+# Get detailed diff
+git diff
+```
+
+## Step 2: Security Review
+
+### Authentication & Authorization
+- [ ] User input validated before processing
+- [ ] SQL queries use parameterized statements (no string concatenation)
+- [ ] Authentication checks present on protected routes
+- [ ] Authorization checks verify user permissions
+- [ ] Sensitive data not logged or exposed
+
+### Input Validation
+- [ ] All user inputs sanitized
+- [ ] File uploads have size limits and type validation
+- [ ] JSON/XML parsing protects against injection
+- [ ] Rate limiting on API endpoints
+
+### Data Protection
+- [ ] Passwords hashed (never plaintext)
+- [ ] Secrets not hardcoded (use environment variables)
+- [ ] API keys not committed to repository
+- [ ] Sensitive data encrypted at rest and in transit
+
+### XSS Prevention
+- [ ] User-generated content sanitized before rendering
+- [ ] HTML entities escaped in templates
+- [ ] Content-Security-Policy headers set
+
+**Security Issues Found:**
+```
+{List any security concerns with severity: Critical/High/Medium/Low}
+```
+
+## Step 3: Logic & Correctness
+
+### Edge Cases
+- [ ] Null/undefined/empty values handled
+- [ ] Zero and negative numbers considered
+- [ ] Maximum/minimum bounds checked
+- [ ] Concurrent access scenarios addressed
+
+### Error Handling
+- [ ] Errors caught and handled appropriately
+- [ ] Error messages user-friendly (no stack traces to users)
+- [ ] Errors logged for debugging
+- [ ] Fallback behavior defined
+
+### Race Conditions
+- [ ] Shared state access synchronized
+- [ ] Database transactions used where needed
+- [ ] Async operations properly awaited
+
+### Resource Management
+- [ ] Database connections closed
+- [ ] File handles released
+- [ ] Memory leaks avoided (event listeners removed)
+- [ ] Timeouts set for external calls
+
+**Logic Issues Found:**
+```
+{List any logic errors or edge cases not handled}
+```
+
+## Step 4: Performance Review
+
+### Database Queries
+- [ ] No N+1 query problems
+- [ ] Indexes exist for frequently queried fields
+- [ ] Query results paginated for large datasets
+- [ ] Unnecessary data not fetched
+
+### Algorithms
+- [ ] Algorithms have acceptable time complexity
+- [ ] No unnecessary nested loops
+- [ ] Caching used for expensive operations
+- [ ] Lazy evaluation where appropriate
+
+### Memory Usage
+- [ ] Large data structures paginated or streamed
+- [ ] No memory leaks (closures, event listeners)
+- [ ] Objects dereferenced when no longer needed
+
+**Performance Issues Found:**
+```
+{List any performance concerns with estimated impact}
+```
+
+## Step 5: Code Quality
+
+### Readability
+- [ ] Variable names descriptive
+- [ ] Functions have clear purpose (single responsibility)
+- [ ] Complex logic has explanatory comments
+- [ ] Magic numbers extracted to named constants
+
+### Maintainability
+- [ ] Functions under 50 lines
+- [ ] Classes under 300 lines
+- [ ] Cyclomatic complexity reasonable (<10)
+- [ ] Code duplication minimized
+
+### Type Safety
+- [ ] No `any` types in TypeScript
+- [ ] Type hints in Python
+- [ ] Null checks where appropriate
+- [ ] Type conversions safe
+
+### Documentation
+- [ ] Public functions have docstrings/JSDoc
+- [ ] Complex algorithms explained
+- [ ] API changes documented
+- [ ] README updated if needed
+
+**Quality Issues Found:**
+```
+{List any code quality concerns}
+```
+
+## Step 6: Testing Review
+
+### Test Coverage
+- [ ] Happy path tested
+- [ ] Error cases tested
+- [ ] Edge cases covered
+- [ ] Integration tests for critical paths
+
+### Test Quality
+- [ ] Tests are deterministic (no flaky tests)
+- [ ] External dependencies mocked
+- [ ] Test names descriptive
+- [ ] Assertions meaningful
+
+### Missing Tests
+```
+{List any scenarios that should be tested but aren't}
+```
+
+## Step 7: Architecture & Design
+
+### Separation of Concerns
+- [ ] Business logic separate from presentation
+- [ ] Database access isolated
+- [ ] No mixed responsibilities
+
+### Dependencies
+- [ ] New dependencies necessary and justified
+- [ ] Dependency versions pinned
+- [ ] Licenses compatible with project
+
+### API Design
+- [ ] Backwards compatible or migration path provided
+- [ ] RESTful conventions followed (if REST API)
+- [ ] Error responses consistent
+
+**Architecture Issues Found:**
+```
+{List any design or architecture concerns}
+```
+
+## Review Summary
+
+### 🔴 Critical Issues (Must Fix Before Merge)
+```
+{List critical issues}
+```
+
+### ⚠️ High Priority (Should Fix Before Merge)
+```
+{List high priority issues}
+```
+
+### 💡 Suggestions (Nice to Have)
+```
+{List suggestions for improvement}
+```
+
+### ✅ Positive Observations
+```
+{List what was done well}
+```
+
+### Recommendation
+
+**Overall Assessment:** {Approve / Request Changes / Needs Discussion}
+
+**Rationale:**
+```
+{Brief explanation of recommendation}
+```
+
+### Next Steps
+
+1. {Action item 1}
+2. {Action item 2}
+3. {Action item 3}
+
+---
+
+## Output Format Options
+
+### Compact Format (Default)
+- Only issues found
+- Grouped by severity
+- Brief descriptions
+
+### Detailed Format (Use with: "detailed review")
+- All checklist items
+- Explanations for each issue
+- Suggestions for fixes
+- Code examples
+
+### Focus Mode (Use with: "focus on security")
+- Deep dive on specific area
+- More thorough analysis
+- Additional checks
+
+---
+
+## Usage Examples
+
+```bash
+# Basic review
+/project:review-code
+
+# Detailed review
+"Please do a detailed review with explanations"
+/project:review-code
+
+# Security-focused
+"Review with focus on security vulnerabilities"
+/project:review-code
+
+# Performance-focused
+"Review with focus on performance"
+/project:review-code
+```
+
+---
+
+## Budget Awareness
+
+**Estimated token cost:** 2-4K tokens (varies by diff size)
+
+**Tips:**
+- For large diffs, review file-by-file
+- Use /compact if exceeding budget
+- Focus on changed code, not entire files
+
+---
+
+**Last Updated:** 2025-12-18  
+**Token Cost:** ~2-4K  
+**Best Used:** Before committing or creating PR
