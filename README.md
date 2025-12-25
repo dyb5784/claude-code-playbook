@@ -1,10 +1,10 @@
 # 🤖 Claude Code Playbook
 
-**Version**: 4.1.1 | **License**: MIT | **Repository**: https://github.com/dyb5784/claude-code-playbook
+**Version**: 4.1.2 | **License**: MIT | **Repository**: https://github.com/dyb5784/claude-code-playbook
 
 A token-efficient AI engineering system that reduces conversation turns through specialized workflows.
 
-**✨ New in v4.1.1**: Cross-platform PowerShell support, comprehensive documentation, and improved Windows compatibility.
+**✨ New in v4.1.2**: Version metadata update and tagged release.
 
 ---
 
@@ -252,7 +252,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**Version**: 4.1.1 | **Date**: December 25, 2025 | **Status**: ✅ Production Ready
+**Version**: 4.1.2 | **Date**: December 25, 2025 | **Status**: ✅ Production Ready
 
 ---
 
