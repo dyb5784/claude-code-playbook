@@ -9,7 +9,7 @@ Write-Host "1. Checking CLAUDE.md size..." -ForegroundColor Yellow
 if (Test-Path "CLAUDE.md") {
     $lineCount = (Get-Content "CLAUDE.md" | Measure-Object -Line).Lines
     if ($lineCount -le 50) {
-        Write-Host "   ✓ CLAUDE.md: $lineCount lines (target: <50)" -ForegroundColor Green
+        Write-Host "   ✓ CLAUDE.md: $lineCount lines (target: less than 50)" -ForegroundColor Green
     } else {
         Write-Host "   ✗ CLAUDE.md: $lineCount lines (exceeds 50 line limit)" -ForegroundColor Red
     }
@@ -24,7 +24,7 @@ if (Test-Path ".claude/settings.json") {
     Write-Host "   ✓ settings.json exists" -ForegroundColor Green
     $settingsSize = (Get-Item ".claude/settings.json").Length
     if ($settingsSize -lt 3072) {
-        Write-Host "   ✓ Size: $settingsSize bytes (target: <3KB)" -ForegroundColor Green
+        Write-Host "   ✓ Size: $settingsSize bytes (target: less than 3KB)" -ForegroundColor Green
     } else {
         Write-Host "   ⚠ Size: $settingsSize bytes (consider simplifying)" -ForegroundColor Yellow
     }
