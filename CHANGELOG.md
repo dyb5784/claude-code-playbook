@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.1] - 2025-12-25
+
+### 🐛 Patch Release - Version Update & Bug Fixes
+
+This patch release includes version updates and minor improvements.
+
+### Changed
+- Updated version number to 4.1.1 across documentation
+- Updated release date to December 25, 2025
+
+### Fixed
+- Version consistency across all documentation files
+
+---
+
 ## [4.1.0] - 2025-12-18
 
 ### 🎉 Major Release - Quick Start & Configuration Improvements

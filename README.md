@@ -1,6 +1,6 @@
 # 🤖 Claude Code Playbook
 
-**Version**: 4.1.0
+**Version**: 4.1.1
 
 **License**: MIT
 
@@ -10,7 +10,7 @@ A token-efficient AI engineering system that reduces conversation turns through 
 
 ---
 
-## 🎯 What is v4.1.0?
+## 🎯 What is v4.1.1?
 
 Complete AI-assisted development system with two specialized skills and seven production workflows, now with **15-minute Quick Start** for new users.
 
@@ -385,4 +385,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**Version**: 4.1.0 | **Date**: December 18, 2025 | **Status**: ✅ Production Ready
+**Version**: 4.1.1 | **Date**: December 25, 2025 | **Status**: ✅ Production Ready
