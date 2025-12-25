@@ -1,6 +1,6 @@
 # 🚀 Getting Started with Claude Code Playbook
 
-**Version**: 4.1.2 | **License**: MIT | **Repository**: https://github.com/dyb5784/claude-code-playbook
+**Version**: 4.1.3 | **License**: MIT | **Repository**: https://github.com/dyb5784/claude-code-playbook
 
 Complete cross-platform setup guide for the Claude Code Playbook - get productive in 15 minutes!
 
@@ -142,6 +142,36 @@ Once your basic setup is working:
 4. **Join the Community**: Share your experience and get help
 
 ---
+
+## 🎯 Essential Commands
+
+Once you're set up, here are the key commands for daily use:
+
+```bash
+# Start your session
+clear && ccnew
+
+# Analyze and plan
+cctriage && ccplan
+
+# Implement changes
+cccode || ccextract
+
+# Check usage and reset
+cccost
+# Reset if >25K tokens: /clear && cccatchup
+```
+
+**Essential Commands Reference:**
+| Command | Purpose | Tokens |
+|---------|---------|--------|
+| `cctriage` | Find refactoring opportunities | ~2K |
+| `ccnew` | Start fresh session | ~2K |
+| `ccplan` | Create refactoring plan | ~3K |
+| `cccode` | Generate implementation | ~8-12K |
+| `cccatchup` | Restore context after reset | ~1-2K |
+
+**💰 Budget**: Stay under 25K tokens per session for Claude Pro efficiency.
 
 ## 🆘 Troubleshooting
 

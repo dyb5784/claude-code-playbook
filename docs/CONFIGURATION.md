@@ -261,4 +261,55 @@ git pull origin main
 
 ---
 
+## 📂 Project Structure
+
+Understanding the playbook structure helps with configuration:
+
+```
+claude-code-playbook/
+├── 📁 docs/                    # Complete documentation
+│   ├── GETTING_STARTED.md     # 15-minute setup guide
+│   ├── CONFIGURATION.md       # Best practices
+│   ├── ALIASES.md            # Productivity shortcuts
+│   ├── TOKEN_ECONOMICS.md    # Token optimization
+│   ├── SUCCESS_GUIDE.md      # Success metrics & learning
+│   └── windows/              # Windows-specific guides
+├── 📁 scripts/               # Health check and utility scripts
+│   ├── check_config_health.sh    # Linux/Mac health check
+│   ├── validate_config.py        # Configuration validator
+│   └── powershell/           # Windows PowerShell scripts
+├── 📁 skills/                # Available skills and workflows
+│   ├── python-scientific/    # Scientific computing patterns
+│   └── refactoring/          # 7 refactoring workflows
+├── 📁 templates/             # Ready-to-use configuration files
+│   ├── CLAUDE.md.template    # Main project configuration
+│   ├── .cursorrules.template # IDE integration rules
+│   ├── .claude/              # Claude-specific settings
+│   └── [5 more templates]    # Complete template set
+└── 📄 README.md              # Main documentation entry point
+```
+
+**Templates include:** CLAUDE.md, .cursorrules, settings, MCP configs, aliases, and more.
+
+## 🔄 Monthly Maintenance
+
+Set a recurring reminder to:
+
+```bash
+# 1. Run health check
+bash scripts/check_config_health.sh
+
+# 2. Review and trim CLAUDE.md if needed
+wc -l CLAUDE.md  # Target: <50 lines
+
+# 3. Audit MCP servers
+cat .mcp.json | grep "enabled.*true"
+
+# 4. Review custom commands
+ls .claude/commands/  # Remove unused commands
+
+# 5. Update playbook (if new version available)
+git pull origin main
+```
+
 **Next Guide**: [Token Economics](TOKEN_ECONOMICS.md) →
