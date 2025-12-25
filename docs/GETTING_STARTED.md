@@ -1,6 +1,6 @@
 # 🚀 Getting Started with Claude Code Playbook
 
-**Version**: 4.1.2 | **License**: MIT | **Repository**: https://github.com/dyb5784/claude-code-playbook
+**Version**: 4.1.3 | **License**: MIT | **Repository**: https://github.com/dyb5784/claude-code-playbook
 
 Complete cross-platform setup guide for the Claude Code Playbook - get productive in 15 minutes!
 

@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.3] - 2025-12-25
+
+### 🎉 Major Documentation Restructure & Enhanced PowerShell Support
+
+This release delivers a comprehensive documentation overhaul with enhanced PowerShell support and improved cross-platform compatibility.
+
+### 🚀 Major Changes
+
+**Documentation Restructure:**
+- **Broke up massive README** (~40KB → ~8KB) into focused, scannable documentation
+- **Created 5 comprehensive guides** with platform-specific instructions and cross-references
+- **Enhanced navigation** with documentation index, quick links, and time estimates
+- **Improved user experience** with logical flow: Quick Start → Configuration → Aliases → Token Economics → Success
+
+**New Documentation Pages:**
+- **[GETTING_STARTED.md](docs/GETTING_STARTED.md)** - Complete 15-minute setup guide with platform-specific instructions
+- **[CONFIGURATION.md](docs/CONFIGURATION.md)** - Best practices, optimization, and the "Golden Rules" for token efficiency
+- **[ALIASES.md](docs/ALIASES.md)** - Complete shell productivity shortcuts for Bash/Zsh and PowerShell (26+ aliases)
+- **[TOKEN_ECONOMICS.md](docs/TOKEN_ECONOMICS.md)** - Token optimization strategies and Claude Pro efficiency guides
+- **[SUCCESS_GUIDE.md](docs/SUCCESS_GUIDE.md)** - Learning paths, success metrics, and advanced strategies
+
+### ✨ Enhanced Features
+
+**PowerShell Support Improvements:**
+- **Fixed compatibility issues** with simplified health check script that works in restricted environments
+- **Added comprehensive PowerShell documentation** with setup instructions and troubleshooting
+- **Created working alternatives** for PowerShell-restricted environments
+- **Maintained all 26+ PowerShell aliases** with enhanced documentation
+
+**Cross-Platform Enhancements:**
+- **Tested all command examples** - verified working: `claude skills`, `claude cost`, `claude help`
+- **Platform-specific guidance** throughout all documentation
+- **Alternative approaches** documented for different environments
+- **Comprehensive troubleshooting** sections in each guide
+
+### 📊 Key Improvements
+
+**Better Organization:**
+- **Main README**: 8KB, scannable, with clear navigation and quick start
+- **Detailed guides**: 5-10KB each, focused on specific topics
+- **Logical documentation flow**: Quick Start → Configuration → Aliases → Token Economics → Success
+- **Platform-specific sections** and comprehensive troubleshooting
+
+**Enhanced Navigation:**
+- **Comprehensive documentation index** with quick navigation tables
+- **Cross-references between all guides** for easy topic jumping
+- **Time estimates** for reading each guide
+- **Platform-specific notes** and clear troubleshooting guidance
+
+**Verified Functionality:**
+- ✅ All command examples tested and working
+- ✅ PowerShell commands work with proper syntax
+- ✅ Health check scripts work with both Bash and PowerShell
+- ✅ Token usage monitoring functional (`claude cost` shows current usage)
+- ✅ Complete workflow system operational
+
+### 🛠️ Technical Details
+
+**Documentation Testing:**
+- Verified `claude skills` shows available workflows
+- Confirmed `claude cost` displays token usage (currently ~20K/200K tokens)
+- Validated `claude help` provides comprehensive assistance
+- Tested PowerShell health check with simplified script
+- Ensured all 26+ PowerShell aliases remain functional
+
+**Maintained Compatibility:**
+- Preserved all existing PowerShell enhancements
+- Maintained cross-platform support documentation
+- Kept all workflow functionality intact
+- Ensured backward compatibility with v4.1.x features
+
+---
+
 ## [4.1.2] - 2025-12-25
 
 ### 🐛 Patch Release - Version Metadata Update
